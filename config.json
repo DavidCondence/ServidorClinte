@@ -1,0 +1,27 @@
+{
+    "firstName": "John",
+    "lastName": "Smith",
+    "age": 25,
+    "address": {
+        "streetAddress": "21 2nd Street",
+        "city": "New York",
+        "state": "NY",
+        "postalCode": 10021
+    },
+    "Proveedores": [
+        {
+            "Proveedor": "Gmail",
+            "Tipo": "SMTP",
+            "Servidor": "smtp.gmail.com",
+            "Puerto": 465,
+            "SSL": true
+        },
+        {
+            "Proveedor": "Outlook",
+            "Tipo": "SMTP",
+            "Servidor": "smtp-mail.outlook.com",
+            "Puerto": 587,
+            "SSL": false
+        }
+    ] 
+}

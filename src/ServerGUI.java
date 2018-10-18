@@ -225,8 +225,8 @@ public class ServerGUI extends javax.swing.JFrame {
         if (!server.mensajes.isEmpty()) { 
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); 
             for (Mensaje bloqueMemoria : server.mensajes) { 
-                 Object[] fila = {bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(),
-                    bloqueMemoria.getAsunto()};  
+                 Object[] fila = {bloqueMemoria.getProveedor(), bloqueMemoria.getDestinatario(), bloqueMemoria.getAsunto(),
+                    bloqueMemoria.getMensaje()};  
                 model.addRow(fila); 
             }
         }

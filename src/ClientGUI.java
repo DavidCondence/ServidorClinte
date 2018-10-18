@@ -1,5 +1,6 @@
 
 import java.awt.event.ActionEvent;
+import java.util.LinkedList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,8 +15,7 @@ import java.awt.event.ActionEvent;
 public class ClientGUI extends javax.swing.JFrame {
     private Client client; 
     private int defaultPort;
-    private String defaultHost;
-    
+    private String defaultHost; 
     private boolean connected;
     public ClientGUI() {  
     }
@@ -25,6 +25,7 @@ public class ClientGUI extends javax.swing.JFrame {
         defaultHost = host;
         initComponents();
         logout.setEnabled(false); 
+        llenarComboBox();
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
         setVisible(true); 
     }
@@ -42,17 +43,16 @@ public class ClientGUI extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        destinatario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        asunto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        proveedoresCombo = new javax.swing.JComboBox<>();
+        cargarProveedores = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jmensaje = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ta = new javax.swing.JTextArea();
@@ -120,40 +120,31 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Destinatario:");
 
-        jTextField1.setText("jTextField1");
+        destinatario.setText("jTextField1");
 
         jLabel4.setText("Asunto:");
 
-        jTextField2.setText("jTextField2");
+        asunto.setText("jTextField2");
 
         jLabel5.setText("Mensaje:");
 
         jLabel6.setText("Proveedores:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton2.setText("Cargar proveedores");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cargarProveedores.setText("Cargar proveedores");
+        cargarProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cargarProveedoresActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jmensaje.setColumns(20);
+        jmensaje.setRows(5);
+        jScrollPane1.setViewportView(jmensaje);
 
         jButton3.setText("Enviar correo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("test");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -171,14 +162,12 @@ public class ClientGUI extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
+                    .addComponent(asunto)
+                    .addComponent(destinatario)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(proveedoresCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(cargarProveedores)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -193,17 +182,16 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(proveedoresCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargarProveedores))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(destinatario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(asunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -273,9 +261,11 @@ public class ClientGUI extends javax.swing.JFrame {
         tfPort.setEditable(false); 
     }//GEN-LAST:event_loginActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cargarProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarProveedoresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        proveedoresCombo.removeAllItems();
+        llenarComboBox();
+    }//GEN-LAST:event_cargarProveedoresActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
@@ -286,15 +276,21 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Mensaje mensaje = new Mensaje("Prueba1","Prueba1","Prueba1");
+        String destinatarios = destinatario.getText();
+        String asuntos = asunto.getText();
+        String jmensajes = jmensaje.getText();
+        
+        
+        Mensaje mensaje = new Mensaje("google", destinatarios,asuntos,jmensajes);
         client.enviarCorreo(mensaje);
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         
-    }//GEN-LAST:event_jButton1ActionPerformed
- 
+    void llenarComboBox(){
+        ConfigReader rconfig = new ConfigReader(); 
+        LinkedList<String> listaProveedores = rconfig.readConfig("config.json");
+        for(int num=0; num<listaProveedores.size(); num++) { 
+            proveedoresCombo.addItem(listaProveedores.get(num).toString());
+        } 
+    }
     void append(String str) {
         ta.append(str);
         ta.setCaretPosition(ta.getText().length() - 1);
@@ -344,10 +340,10 @@ public class ClientGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField asunto;
+    private javax.swing.JButton cargarProveedores;
+    private javax.swing.JTextField destinatario;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -360,11 +356,10 @@ public class ClientGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea jmensaje;
     private javax.swing.JButton login;
     private javax.swing.JButton logout;
+    private javax.swing.JComboBox<String> proveedoresCombo;
     private javax.swing.JTextArea ta;
     private javax.swing.JTextField tfPort;
     private javax.swing.JTextField tfServer;

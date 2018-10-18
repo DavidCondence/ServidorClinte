@@ -21,12 +21,23 @@ public class Mensaje implements Serializable {
     // LOGOUT to disconnect from the Server
     static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2;
     private int type;
-    private String message;
-    public Mensaje(String Destinatario, String Asunto, String Mensaje) {
+    private String message,proveedor;
+
+    public Mensaje(String Destinatario, String Asunto, String Mensaje, String proveedor) {
         this.Destinatario = Destinatario;
         this.Asunto = Asunto;
         this.Mensaje = Mensaje;
-    }  
+        this.proveedor = proveedor;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+    
     Mensaje(int type, String message) {
             this.type = type;
             this.message = message;
