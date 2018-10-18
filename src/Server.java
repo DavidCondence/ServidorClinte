@@ -62,23 +62,25 @@ public class Server {
     } 
     private void display(String msg) {
         String time = sdf.format(new Date()) + " " + msg;
-        if(sg == null)
-                System.out.println(time);
-        else
-                sg.appendEvent(time + "\n");
+        if(sg == null) {
+                System.out.println(time);  
+        } else{
+                sg.appendEvent(time + ",\n"); 
+                 
+        }
     } 
     private synchronized void broadcast(String message) { 
         String time = sdf.format(new Date());
         String messageLf = time + " " + message + "\n"; 
-        if(sg == null)
-            System.out.print(messageLf);
-        else
-            sg.appendRoom(messageLf);  
-        for(int i = al.size(); --i >= 0;) {
-            ClientThread ct = al.get(i); 
-            if(!ct.writeMsg(messageLf)) {
-                al.remove(i);
-                display("Disconnected Client " + ct.username + " removed from list.");
+        if(sg == null) {
+            System.out.print(messageLf); 
+        } else {
+            for(int i = al.size(); --i >= 0;) {
+                ClientThread ct = al.get(i); 
+                if(!ct.writeMsg(messageLf)) {
+                    al.remove(i);
+                    display("Disconnected Client " + ct.username + " removed from list.");
+                }
             }
         }
     } 

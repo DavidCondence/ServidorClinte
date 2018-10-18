@@ -10,6 +10,7 @@ public class Client  {
     private ObjectOutputStream sOutput;		// to write on the socket
     private Socket socket; 
     private ClientGUI cg; 
+    private ServerGUI sg; 
     private String server, username;
     private int port; 
     Client(String server, int port, String username) { 
@@ -51,10 +52,12 @@ public class Client  {
         return true;
     } 
     private void display(String msg) {
-        if(cg == null)
+        if(cg == null) {
             System.out.println(msg); 
-        else
+        } else {
             cg.append(msg + "\n"); 
+             
+        } 
     } 
     void sendMessage(Mensaje msg) {
         try {

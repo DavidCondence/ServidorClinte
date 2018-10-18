@@ -12,8 +12,7 @@ import java.awt.event.ActionEvent;
  * @author David
  */
 public class ClientGUI extends javax.swing.JFrame {
-    private Client client;
-    
+    private Client client; 
     private int defaultPort;
     private String defaultHost;
     
@@ -299,6 +298,7 @@ public class ClientGUI extends javax.swing.JFrame {
     void append(String str) {
         ta.append(str);
         ta.setCaretPosition(ta.getText().length() - 1);
+      
     } 
     void connectionFailed() {
         login.setEnabled(true);
