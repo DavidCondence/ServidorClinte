@@ -1,14 +1,18 @@
+package Datos;
+
+import Interfaz.ServerGUI;
+import Negocio.Mensaje;
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.*; 
 public class Server { 
-    private static int uniqueId; 
-    private ArrayList<ClientThread> al; 
-    private ServerGUI sg; 
-    private SimpleDateFormat sdf; 
-    private int port; 
-    private boolean keepGoing; 
+    public static int uniqueId; 
+    public ArrayList<ClientThread> al; 
+    public ServerGUI sg; 
+    public SimpleDateFormat sdf; 
+    public int port; 
+    public boolean keepGoing; 
     
     public static LinkedList<Mensaje> mensajes = new LinkedList<Mensaje>();
     public Server(int port) {
@@ -52,7 +56,7 @@ public class Server {
             display(msg);
         }
     }	 
-    protected void stop() {
+    public void stop() {
         keepGoing = false; 
         try {
             new Socket("localhost", port);
@@ -60,7 +64,7 @@ public class Server {
         catch(Exception e) { 
         }
     } 
-    private void display(String msg) {
+    public void display(String msg) {
         String time = sdf.format(new Date()) + " " + msg;
         if(sg == null) {
             System.out.println(time);  
@@ -69,7 +73,7 @@ public class Server {
              
         }
     } 
-    private synchronized void broadcast(String message) { 
+    public synchronized void broadcast(String message) { 
         String time = sdf.format(new Date());
         String messageLf = time + " " + message + "\n"; 
         if(sg == null) {
@@ -93,7 +97,7 @@ public class Server {
             }
         }
     }  
-    class ClientThread extends Thread { 
+    public class ClientThread extends Thread { 
         Socket socket;
         ObjectInputStream sInput;
         ObjectOutputStream sOutput; 
@@ -102,7 +106,7 @@ public class Server {
         Mensaje cm; 
         
         String date; 
-        ClientThread(Socket socket) {
+        public ClientThread(Socket socket) {
             id = ++uniqueId;
             this.socket = socket; 
             System.out.println("Thread trying to create Object Input/Output Streams");
@@ -155,7 +159,7 @@ public class Server {
             remove(id);
             close();
         } 
-        private void close() { 
+        public void close() { 
             try {
                 if(sOutput != null) sOutput.close();
             } catch(Exception e) {}
@@ -168,7 +172,7 @@ public class Server {
             }
             catch (Exception e) {}
         } 
-        private boolean writeMsg(String msg) { 
+        public boolean writeMsg(String msg) { 
           
             if(!socket.isConnected()) { 
                 close();

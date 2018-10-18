@@ -1,3 +1,5 @@
+package Negocio;
+
 
 import java.io.Serializable;
 
@@ -19,7 +21,7 @@ public class Mensaje implements Serializable {
     // WHOISIN to receive the list of the users connected
     // MESSAGE an ordinary message
     // LOGOUT to disconnect from the Server
-    static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2;
+    public static final int WHOISIN = 0, MESSAGE = 1, LOGOUT = 2;
     private int type;
     private String message,proveedor;
 
@@ -38,7 +40,7 @@ public class Mensaje implements Serializable {
         this.proveedor = proveedor;
     }
     
-    Mensaje(int type, String message) {
+    public Mensaje(int type, String message) {
             this.type = type;
             this.message = message;
     }  
@@ -60,10 +62,10 @@ public class Mensaje implements Serializable {
     public void setMensaje(String Mensaje) {
         this.Mensaje = Mensaje;
     } 
-    int getType() {
+    public int getType() {
         return type;
     }
-    String getMessage() {
+    public String getMessage() {
         return "Mensaje{" + "Destinatario=" + Destinatario + ", Asunto=" + Asunto + ", Mensaje=" + Mensaje + ", type=" + type + ", message=" + message + '}';
     }
 

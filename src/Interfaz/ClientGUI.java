@@ -1,4 +1,9 @@
+package Interfaz;
 
+
+import Datos.ConfigReader;
+import Datos.Client;
+import Negocio.Mensaje;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
 
@@ -13,10 +18,10 @@ import java.util.LinkedList;
  * @author David
  */
 public class ClientGUI extends javax.swing.JFrame {
-    private Client client; 
-    private int defaultPort;
-    private String defaultHost; 
-    private boolean connected;
+    public Client client; 
+    public int defaultPort;
+    public String defaultHost; 
+    public boolean connected;
     public ClientGUI() {  
     }
     public ClientGUI(String host, int port) { 
@@ -279,19 +284,19 @@ public class ClientGUI extends javax.swing.JFrame {
         Mensaje mensaje = new Mensaje(destinatarios,asuntos,jmensajes, proveedoresCombo.getSelectedItem().toString());
         client.enviarCorreo(mensaje);
     }//GEN-LAST:event_jButton3ActionPerformed
-    void llenarComboBox(){
+    public void llenarComboBox(){
         ConfigReader rconfig = new ConfigReader(); 
         LinkedList<String> listaProveedores = rconfig.readConfig("config.json");
         for(int num=0; num<listaProveedores.size(); num++) { 
             proveedoresCombo.addItem(listaProveedores.get(num).toString());
         } 
     }
-    void append(String str) {
+    public void append(String str) {
         ta.append(str);
         ta.setCaretPosition(ta.getText().length() - 1);
       
     } 
-    void connectionFailed() {
+    public void connectionFailed() {
         login.setEnabled(true);
         logout.setEnabled(false);    
         tfServer.setEditable(false);

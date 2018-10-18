@@ -1,3 +1,5 @@
+package Negocio;
+
 import java.io.*; 
 public class ChatMessage implements Serializable { 
     protected static final long serialVersionUID = 1112122200L; 

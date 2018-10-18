@@ -1,4 +1,8 @@
+package Interfaz;
 
+
+import Datos.Server;
+import Negocio.Mensaje;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -10,7 +14,7 @@ public class ServerGUI extends javax.swing.JFrame {
     public ServerGUI() {
         initComponents();
     } 
-    ServerGUI(int port) {
+    public ServerGUI(int port) {
         super("Chat Server");
         server = null;
         initComponents(); 
@@ -173,11 +177,11 @@ public class ServerGUI extends javax.swing.JFrame {
         tPortNumber.setEditable(false);
     }//GEN-LAST:event_stopStartActionPerformed
     
-    void llenarT(){
+    public void llenarT(){
         EliminarTablaTareas();
         llenarTablaMemoria();
     }
-    void appendEvent(String str) {
+    public void appendEvent(String str) {
         event.append(str); 
 
     }

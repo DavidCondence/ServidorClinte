@@ -1,3 +1,7 @@
+package Datos;
+
+import Interfaz.ClientGUI;
+import Negocio.Mensaje;
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -6,16 +10,16 @@ import java.util.*;
  * The Client that can be run both as a console or a GUI
  */
 public class Client  { 
-    private ObjectInputStream sInput;		// to read from the socket
-    private ObjectOutputStream sOutput;		// to write on the socket
-    private Socket socket; 
-    private ClientGUI cg;  
-    private String server, username;
-    private int port; 
-    Client(String server, int port, String username) { 
+    public ObjectInputStream sInput;		// to read from the socket
+    public ObjectOutputStream sOutput;		// to write on the socket
+    public Socket socket; 
+    public ClientGUI cg;  
+    public String server, username;
+    public int port; 
+    public Client(String server, int port, String username) { 
             this(server, port, username, null);
     } 
-    Client(String server, int port, String username, ClientGUI cg) {
+    public Client(String server, int port, String username, ClientGUI cg) {
             this.server = server;
             this.port = port;
             this.username = username; 
@@ -50,7 +54,7 @@ public class Client  {
         } 
         return true;
     } 
-    private void display(String msg) {
+    public void display(String msg) {
         if(cg == null) {
             System.out.println(msg);
             
@@ -59,7 +63,7 @@ public class Client  {
              
         } 
     } 
-    void sendMessage(Mensaje msg) {
+    public void sendMessage(Mensaje msg) {
         try {
             sOutput.writeObject(msg);
             
@@ -68,7 +72,7 @@ public class Client  {
             display("Exception writing to server: " + e);
         }
     } 
-    void enviarCorreo(Mensaje mensaje){
+    public void enviarCorreo(Mensaje mensaje){
         try {
             sOutput.writeObject(mensaje);
         }
@@ -76,7 +80,7 @@ public class Client  {
             display("Exception writing to server: " + e);
         }
     }
-    private void disconnect() {
+    public void disconnect() {
         try { 
                 if(sInput != null) sInput.close();
         }
@@ -91,7 +95,7 @@ public class Client  {
             if(cg != null)
                 cg.connectionFailed(); 
     }  
-    class ListenFromServer extends Thread { 
+    public class ListenFromServer extends Thread { 
         public void run() {
             while(true) {
                 try {
@@ -107,7 +111,7 @@ public class Client  {
                 catch(IOException e) {
                     display("Server has close the connection: " + e);
                     if(cg != null) 
-                            cg.connectionFailed();
+                        cg.connectionFailed();
                     break;
                 } 
                 catch(ClassNotFoundException e2) {
