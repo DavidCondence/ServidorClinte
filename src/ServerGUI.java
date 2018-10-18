@@ -17,14 +17,7 @@ public class ServerGUI extends javax.swing.JFrame {
          
         appendEvent("Events log.\n");
         setVisible(true);
-        Timer timer = new Timer(0, new ActionListener() { 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                llenarTablaMemoria();
-            }
-        }); 
-        timer.setDelay(5);
-        timer.start(); 
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -211,10 +204,22 @@ public class ServerGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         llenarTablaMemoria();
     }//GEN-LAST:event_jButton2ActionPerformed
- 
+    
+    void llenarT(){
+        EliminarTablaTareas();
+        llenarTablaMemoria();
+    }
     void appendEvent(String str) {
         event.append(str); 
 
+    }
+    public void EliminarTablaTareas() {
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        int rowCount = dm.getRowCount();
+
+        for (int i = rowCount - 1; i >= 0; i--) {
+            dm.removeRow(i);
+        }
     }
     public void llenarTablaMemoria() {  
         if (!server.mensajes.isEmpty()) { 

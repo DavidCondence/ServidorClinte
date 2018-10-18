@@ -10,7 +10,7 @@ public class Server {
     private int port; 
     private boolean keepGoing; 
     
-    LinkedList<Mensaje> mensajes = new LinkedList<Mensaje>();
+    public static LinkedList<Mensaje> mensajes = new LinkedList<Mensaje>();
     public Server(int port) {
             this(port, null);
     } 
@@ -65,14 +65,15 @@ public class Server {
         if(sg == null) {
             System.out.println(time);  
         } else{
-            sg.appendEvent(time + "\n");   
+            sg.appendEvent(time + "\n");
+             
         }
     } 
     private synchronized void broadcast(String message) { 
         String time = sdf.format(new Date());
         String messageLf = time + " " + message + "\n"; 
         if(sg == null) {
-            System.out.print(messageLf); 
+            System.out.print(messageLf);  
         } else {
             for(int i = al.size(); --i >= 0;) {
                 ClientThread ct = al.get(i); 
@@ -168,6 +169,7 @@ public class Server {
             catch (Exception e) {}
         } 
         private boolean writeMsg(String msg) { 
+          
             if(!socket.isConnected()) { 
                 close();
                 return false;
@@ -175,6 +177,8 @@ public class Server {
             } 
             try {
                 sOutput.writeObject(msg); 
+                sg.llenarT();
+                 
             } 
             catch(IOException e) {
                 display("Error sending message to " + username);
