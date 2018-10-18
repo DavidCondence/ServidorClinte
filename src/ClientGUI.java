@@ -120,8 +120,6 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Destinatario:");
 
-        destinatario.setText("jTextField1");
-
         jLabel4.setText("Asunto:");
 
         asunto.setText("jTextField2");
@@ -278,10 +276,9 @@ public class ClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String destinatarios = destinatario.getText();
         String asuntos = asunto.getText();
-        String jmensajes = jmensaje.getText();
-        
-        
-        Mensaje mensaje = new Mensaje("google", destinatarios,asuntos,jmensajes);
+        String jmensajes = jmensaje.getText(); 
+        // public Mensaje(String Destinatario, String Asunto, String Mensaje, String proveedor) 
+        Mensaje mensaje = new Mensaje(destinatarios,asuntos,jmensajes, proveedoresCombo.getSelectedItem().toString());
         client.enviarCorreo(mensaje);
     }//GEN-LAST:event_jButton3ActionPerformed
     void llenarComboBox(){
