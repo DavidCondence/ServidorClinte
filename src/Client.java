@@ -9,8 +9,7 @@ public class Client  {
     private ObjectInputStream sInput;		// to read from the socket
     private ObjectOutputStream sOutput;		// to write on the socket
     private Socket socket; 
-    private ClientGUI cg; 
-    private ServerGUI sg; 
+    private ClientGUI cg;  
     private String server, username;
     private int port; 
     Client(String server, int port, String username) { 
@@ -42,7 +41,7 @@ public class Client  {
         } 
         new ListenFromServer().start(); 
         try {
-            sOutput.writeObject(username);
+            sOutput.writeObject(username); 
         }
         catch (IOException eIO) {
             display("Exception doing login : " + eIO);
@@ -53,7 +52,8 @@ public class Client  {
     } 
     private void display(String msg) {
         if(cg == null) {
-            System.out.println(msg); 
+            System.out.println(msg);
+            
         } else {
             cg.append(msg + "\n"); 
              
@@ -62,6 +62,7 @@ public class Client  {
     void sendMessage(Mensaje msg) {
         try {
             sOutput.writeObject(msg);
+            
         }
         catch(IOException e) {
             display("Exception writing to server: " + e);
@@ -100,7 +101,7 @@ public class Client  {
                         System.out.print("> ");
                     }
                     else {
-                        cg.append(msg);
+                        cg.append(msg);  
                     }
                 }
                 catch(IOException e) {

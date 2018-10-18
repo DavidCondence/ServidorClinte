@@ -63,10 +63,9 @@ public class Server {
     private void display(String msg) {
         String time = sdf.format(new Date()) + " " + msg;
         if(sg == null) {
-                System.out.println(time);  
+            System.out.println(time);  
         } else{
-                sg.appendEvent(time + ",\n"); 
-                 
+            sg.appendEvent(time + "\n");   
         }
     } 
     private synchronized void broadcast(String message) { 
@@ -169,12 +168,13 @@ public class Server {
             catch (Exception e) {}
         } 
         private boolean writeMsg(String msg) { 
-            if(!socket.isConnected()) {
+            if(!socket.isConnected()) { 
                 close();
                 return false;
+                
             } 
             try {
-                sOutput.writeObject(msg);
+                sOutput.writeObject(msg); 
             } 
             catch(IOException e) {
                 display("Error sending message to " + username);

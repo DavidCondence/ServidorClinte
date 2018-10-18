@@ -1,4 +1,7 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 public class ServerGUI extends javax.swing.JFrame {
@@ -14,6 +17,14 @@ public class ServerGUI extends javax.swing.JFrame {
          
         appendEvent("Events log.\n");
         setVisible(true);
+        Timer timer = new Timer(0, new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                llenarTablaMemoria();
+            }
+        }); 
+        timer.setDelay(5);
+        timer.start(); 
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -205,13 +216,16 @@ public class ServerGUI extends javax.swing.JFrame {
         event.append(str); 
 
     }
-    public void llenarTablaMemoria() { 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); 
-        for (Mensaje bloqueMemoria : server.mensajes) { 
-             Object[] fila = {bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(),
-                bloqueMemoria.getAsunto()};  
-            model.addRow(fila); 
+    public void llenarTablaMemoria() {  
+        if (!server.mensajes.isEmpty()) { 
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); 
+            for (Mensaje bloqueMemoria : server.mensajes) { 
+                 Object[] fila = {bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(), bloqueMemoria.getAsunto(),
+                    bloqueMemoria.getAsunto()};  
+                model.addRow(fila); 
+            }
         }
+       
     } 
     public class ServerRunning extends Thread {
         public void run() {
@@ -220,8 +234,7 @@ public class ServerGUI extends javax.swing.JFrame {
             stopStart.setText("Start");
             tPortNumber.setEditable(true);
             appendEvent("Server crashed\n");
-            server = null; 
-            System.out.println("t");
+            server = null;  
         }
     }
     public static void main(String args[]) {
