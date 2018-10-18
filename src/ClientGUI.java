@@ -122,8 +122,6 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Asunto:");
 
-        asunto.setText("jTextField2");
-
         jLabel5.setText("Mensaje:");
 
         jLabel6.setText("Proveedores:");
